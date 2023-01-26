@@ -12,7 +12,7 @@ CREATE TABLE `user` (
                          `active` BOOLEAN NOT NULL DEFAULT true,
                          `admin` BOOLEAN NOT NULL DEFAULT false,
                          `profile_img` VARCHAR(150) NULL DEFAULT 'no_picture.png',
-                         `id_payement` INT NOT NULL,
+                         `id_payment` INT NOT NULL,
                          `id_address` INT NOT NULL
 )Engine = InnoDB;
 
@@ -58,8 +58,8 @@ CREATE TABLE `payment`(
 CREATE TABLE `order`(
                          `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          `id_status` INT NOT NULL,
-                         `id_product` INT NOT NULL,
-                         `date_order` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `id_basket` INT NOT NULL,
+                         `date_order` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 )Engine = InnoDB;
 
 CREATE TABLE `status`(
@@ -67,11 +67,19 @@ CREATE TABLE `status`(
                          `name` VARCHAR(255) NOT NULL
 )Engine = InnoDB;
 
-ALTER TABLE `user` ADD CONSTRAINT `fk_user_payment` FOREIGN KEY (`id_payement`) REFERENCES `payement`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+CREATE TABLE `basket`(
+                        `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                        `id_product` INT NOT NULL,
+                        `date_basket` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+)Engine = InnoDB;
+
+ALTER TABLE `user` ADD CONSTRAINT `fk_user_payment` FOREIGN KEY (`id_payment`) REFERENCES `payment`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address` FOREIGN KEY (`id_address`) REFERENCES `address`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `product` ADD CONSTRAINT `fk_product_category` FOREIGN KEY (`id_category`) REFERENCES `category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `product` ADD CONSTRAINT `fk_product_sub-category` FOREIGN KEY (`id_sub-category`) REFERENCES `sub-category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_status` FOREIGN KEY (`id_status`)  REFERENCES `status`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_product` FOREIGN KEY (`id_product`) REFERENCES `product`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_basket` FOREIGN KEY (`id_basket`) REFERENCES `basket`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `basket` ADD CONSTRAINT `fk_basket_id_product` FOREIGN KEY (`id_product`) REFERENCES `product`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
