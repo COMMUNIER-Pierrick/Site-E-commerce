@@ -18,9 +18,9 @@ CREATE TABLE `user` (
 
 CREATE TABLE `product`(
                            `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                           `name` INT NOT NULL,
+                           `product_name` INT NOT NULL,
                            `id_category` INT NOT NULL,
-                           `id_sub-category` INT NOT NULL,
+                           `id_sub_category` INT NOT NULL,
                            `price` DOUBLE NULL,
                            `product_img` VARCHAR(255) NOT NULL DEFAULT 'no_picture.png',
                            `description_product` TEXT NULL,
@@ -29,12 +29,12 @@ CREATE TABLE `product`(
 
 CREATE TABLE `category`(
                         `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        `name` VARCHAR(50) NOT NULL
+                        `category_name` VARCHAR(50) NOT NULL
 )Engine = InnoDB;
 
-CREATE TABLE `sub-category`(
+CREATE TABLE `sub_category`(
                         `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        `name` VARCHAR(50) NOT NULL
+                        `sub_category_name` VARCHAR(50) NOT NULL
 )Engine = InnoDB;
 
 CREATE TABLE `address`(
@@ -49,10 +49,9 @@ CREATE TABLE `address`(
 
 CREATE TABLE `payment`(
                           `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                          `name` VARCHAR(255) NULL,
-                          `iban` VARCHAR(255) NULL,
-                          `number_card` VARCHAR(20) NULL,
-                          `expired_date_card` DATETIME NULL
+                          `card_name` VARCHAR(255) NULL,
+                          `card_number` VARCHAR(20) NULL,
+                          `card_expired_date` DATETIME NULL
 )Engine = InnoDB;
 
 CREATE TABLE `order`(
@@ -64,7 +63,7 @@ CREATE TABLE `order`(
 
 CREATE TABLE `status`(
                          `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                         `name` VARCHAR(255) NOT NULL
+                         `status_name` VARCHAR(255) NOT NULL
 )Engine = InnoDB;
 
 CREATE TABLE `basket`(
@@ -78,7 +77,7 @@ ALTER TABLE `user`  ADD CONSTRAINT `fk_user_payment` FOREIGN KEY (`id_payment`) 
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address` FOREIGN KEY (`id_address`) REFERENCES `address`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `product` ADD CONSTRAINT `fk_product_category` FOREIGN KEY (`id_category`) REFERENCES `category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `product` ADD CONSTRAINT `fk_product_sub-category` FOREIGN KEY (`id_sub-category`) REFERENCES `sub-category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `product` ADD CONSTRAINT `fk_product_sub-category` FOREIGN KEY (`id_sub_category`) REFERENCES `sub_category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_status` FOREIGN KEY (`id_status`)  REFERENCES `status`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_basket` FOREIGN KEY (`id_basket`) REFERENCES `basket`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
