@@ -24,6 +24,7 @@ CREATE TABLE `product`(
                            `price` DOUBLE NULL,
                            `product_img` VARCHAR(255) NOT NULL DEFAULT 'no_picture.png',
                            `description_product` TEXT NULL,
+                           `stock` INT NOT NULL,
                            `date_created` DATETIME DEFAULT CURRENT_TIMESTAMP
 )Engine = InnoDB;
 
