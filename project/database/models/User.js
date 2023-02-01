@@ -14,8 +14,12 @@ module.exports = class User {
         this.address = address;
     };
 
-    static UserUpdate(firstname, lastname, email, phone, check, address){
-        return new User(null, firstname, lastname, null, email, phone, null, null, null, null, address);
+    static UserAll(id, firstname, lastname, password, email, phone, active, admin, profileImg, payment, address){
+        return new User(id, firstname, lastname, password, email, phone, active, admin, profileImg, payment, address);
+    };
+
+    static UserUpdateProfile(firstname, lastname, email, phone){
+        return new User(null, firstname, lastname, null, email, phone, null, null, null, null, null);
     };
 
     static UserInsert(firstname, lastname, password, email, active, admin, payment, address){
