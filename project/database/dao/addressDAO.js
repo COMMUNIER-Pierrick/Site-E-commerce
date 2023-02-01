@@ -15,7 +15,7 @@ async function getById(id){
         const [rows] = await con.execute(SELECT_ADDRESS_BY_ID, [id]);
         return rows;
     } catch (error) {
-        log.error("Error addressDAO selectByWithInfo : " + error);
+        log.error("Error addressDAO getById : " + error);
         throw errorMessage;
     } finally {
         if (con !== null) {
