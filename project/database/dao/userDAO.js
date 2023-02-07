@@ -23,8 +23,7 @@ async function updateProfile(User, id){
     try{
         con = await database.getConnection();
         await con.execute(SQL_UPDATE_PROFILE, [User.firstname, User.lastname, User.phone, User.email, id]);
-        const newUser = await getById(id);
-        return newUser;
+        return await getById(id);
     }catch (error) {
         log.error("Error userDAO update : " + error);
         throw errorMessage;
@@ -40,6 +39,7 @@ async function getById(id){
     try{
         con = await database.getConnection();
         const [user] = await con.execute(SELECT_USER_BY_ID, [id]);
+        delete user.password;
         let payment = await paymentDAO.getById(user[0].id_payment);
         const newPayment = new Payment(payment[0].id, payment[0].card_name, payment[0].card_number, payment[0].card_expired_date);
         const address = await addressDAO.getById(user[0].id_address);
@@ -58,8 +58,15 @@ async function getAllUser(){
     let con = null;
     try{
         con = await database.getConnection();
-        const [rows] = await con.execute(SELECT_ALL_USER);
-        return rows;
+        const [users] = await con.execute(SELECT_ALL_USER);
+        let listUsersSender = [];
+        for(let i = 0; i < users.length; i++) {
+            let newUser = await getById(users[i].id);
+            delete newUser.password;
+
+            listUsersSender.push({"User": newUser});
+        }
+        return listUsersSender;
     }catch (error) {
         log.error("Error userDAO getAllUser : " + error);
         throw errorMessage;
