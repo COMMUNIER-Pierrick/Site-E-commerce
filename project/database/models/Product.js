@@ -1,9 +1,9 @@
 module.exports = class Product{
-    constructor(id, productName, idCategory, idSubCategory, price, productImg, descriptionProduct, stock, dateCreated) {
+    constructor(id, productName, Category, SubCategory, price, productImg, descriptionProduct, stock, dateCreated) {
         this.id = id;
         this.productName = productName;
-        this.idCategory = idCategory;
-        this.idSubCategory = idSubCategory;
+        this.Category = Category;
+        this.SubCategory = SubCategory;
         this.price = price;
         this.productImg = productImg;
         this.descriptionProduct = descriptionProduct;
@@ -11,11 +11,11 @@ module.exports = class Product{
         this.dateCreated = dateCreated;
     };
 
-    static ProductUpdate(id, productName, idCategory, idSubCategory, price, productImg, descriptionProduct, stock){
+    static ProductUpdate(id, productName, Category, SubCategory, price, productImg, descriptionProduct, stock){
         return new Product(id, productName, null, null, price, productImg, descriptionProduct, stock);
     };
 
-    static ProductInsert(productName, idCategory, idSubCategory, price, productImg, descriptionProduct, stock){
-        return new Product(null, productName, idCategory, idSubCategory, price, productImg, descriptionProduct, stock);
+    static ProductInsert(productName, Category, SubCategory, price, productImg, descriptionProduct, stock){
+        return new Product(null, productName, Category, SubCategory, price, productImg, descriptionProduct, stock);
     };
 }
