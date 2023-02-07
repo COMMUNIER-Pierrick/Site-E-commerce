@@ -71,3 +71,7 @@ INSERT INTO `product` SET product_name='Parrure turquoise', id_category=5, id_su
 INSERT INTO `product` SET product_name='Parrure blanche', id_category=5, id_sub_category=20, price=15, product_img='no_picture.png', description_product='', stock=9, date_created='2022-10-15T00:00:00';
 INSERT INTO `product` SET product_name='Parrure Multicolore', id_category=5, id_sub_category=22, price=22, product_img='no_picture.png', description_product='', stock=12, date_created='2022-10-15T00:00:00';
 INSERT INTO `product` SET product_name='Parrure orange', id_category=5, id_sub_category=24, price=12, product_img='no_picture.png', description_product='', stock=6, date_created='2022-10-15T00:00:00';
+
+INSERT INTO `basket` SET id_user=1, id_product=3, date_basket='2022-10-15T00:00:00';
+INSERT INTO `basket` SET id_user=4, id_product=11, date_basket='2022-02-27T00:00:00';
+INSERT INTO `basket` SET id_user=2, id_product=7, date_basket='2022-07-11T00:00:00';
