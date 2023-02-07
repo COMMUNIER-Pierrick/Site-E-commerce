@@ -1,8 +1,8 @@
 module.exports = class Basket {
-    constructor(id, idUser, idProduct, dateBasket) {
+    constructor(id, User, Product, dateBasket) {
         this.id = id;
-        this.idUser = idUser;
-        this.idProduct = idProduct;
+        this.User = User;
+        this.Product = Product;
         this.dateBasket = dateBasket;
     };
 }
