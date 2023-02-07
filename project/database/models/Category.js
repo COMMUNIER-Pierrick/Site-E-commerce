@@ -3,12 +3,4 @@ module.exports = class Category{
         this.id = id;
         this.categoryName = categoryName;
     };
-
-    static CategoryInsert(categoryName) {
-        return new Category(null, categoryName);
-    };
-
-    static CategoryUpdate(categoryName) {
-        return new Category(null, categoryName);
-    };
 }
