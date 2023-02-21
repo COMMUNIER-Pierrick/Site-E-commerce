@@ -8,4 +8,8 @@ module.exports = class Address{
         this.city = city;
         this.country = country;
     };
+
+    static AddressInsert(number, street, additionalAddress, zipCode, city, country){
+        return new Address(null, number, street, null, zipCode, city, country)
+    };
 }
