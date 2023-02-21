@@ -75,3 +75,6 @@ INSERT INTO `product` SET product_name='Parrure orange', id_category=5, id_sub_c
 INSERT INTO `basket` SET id_user=1, id_product=3, date_basket='2022-10-15T00:00:00';
 INSERT INTO `basket` SET id_user=4, id_product=11, date_basket='2022-02-27T00:00:00';
 INSERT INTO `basket` SET id_user=2, id_product=7, date_basket='2022-07-11T00:00:00';
+
+INSERT INTO `order` SET id_status=1, id_basket=2, date_order='2022-02-27T00:00:00';
+INSERT INTO `order` SET id_status=3, id_basket=3, date_order='2022-07-11T00:00:00';
