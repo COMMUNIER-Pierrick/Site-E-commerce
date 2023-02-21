@@ -14,6 +14,7 @@ app.use("/status", require("./routes/status"));
 app.use("/product", require("./routes/product"));
 app.use("/basket", require("./routes/basket"));
 app.use("/payment", require("./routes/payment"));
+app.use("/order", require("./routes/order"));
 
 try{
     http.listen(port, () => {
