@@ -9,7 +9,7 @@ module.exports = class Address{
         this.country = country;
     };
 
-    static AddressInsert(number, street, additionalAddress, zipCode, city, country){
-        return new Address(null, number, street, null, zipCode, city, country)
+    static AddressUpdate(id, number, street, additionalAddress, zipCode, city, country){
+        return new Address(id, number, street, null, zipCode, city, country)
     };
 }
