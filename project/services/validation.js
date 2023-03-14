@@ -62,6 +62,7 @@ const updateValidation = (data) => {
         payment: joi.not().required(),
         address: joi.not().required(),
     });
+
     return schema.validate(data);
 };
 
