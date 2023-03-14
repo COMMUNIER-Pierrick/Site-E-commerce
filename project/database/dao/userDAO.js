@@ -20,7 +20,6 @@ const SELECT_CONTROL_IDENTIFIER = `SELECT email FROM user WHERE email = ?`;
 
 async function insert(User){
     let con = null;
-
     try{
         con = await database.getConnection();
         const idPayment = await paymentDAO.insert();
@@ -55,7 +54,6 @@ async function remove(id){
 
 async function updateProfile(User, id){
     let con = null;
-
     try{
         con = await database.getConnection();
         await con.execute(SQL_UPDATE_PROFILE, [User.firstname, User.lastname, User.phone, User.email, id]);
