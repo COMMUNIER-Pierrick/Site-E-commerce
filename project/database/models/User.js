@@ -23,6 +23,6 @@ module.exports = class User {
     };
 
     static UserInsert(firstname, lastname, password, email, active, admin, payment, address){
-        return new User(null, firstname, lastname, password, email,null, null, null, null, null, address)
+        return new User(null, firstname, lastname, password, email,null, null, null, null, null, null)
     };
 }
