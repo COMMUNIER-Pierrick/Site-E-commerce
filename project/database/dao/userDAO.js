@@ -1,7 +1,6 @@
 const database = require('../tools/database');
 const paymentDAO = require("./paymentDAO");
 const addressDAO = require("./addressDAO");
-const Payment = require("../models/Payment");
 const User = require("../models/User");
 const log = require("../../log/logger");
 
@@ -30,7 +29,7 @@ async function insert(User){
     }catch (error) {
         log.error("Error userDAO insert : " + error);
         throw errorMessage;
-    } finally {
+    }finally {
         if (con !== null) {
             con.end();
         }
@@ -45,7 +44,7 @@ async function remove(id){
     }catch (error) {
         log.error("Error userDAO remove : " + error);
         throw errorMessage;
-    } finally {
+    }finally {
         if (con !== null) {
             con.end();
         }
@@ -61,7 +60,7 @@ async function updateProfile(User, id){
     }catch (error) {
         log.error("Error userDAO update : " + error);
         throw errorMessage;
-    } finally {
+    }finally {
         if (con !== null) {
             con.end();
         }
@@ -74,13 +73,13 @@ async function getById(id){
         con = await database.getConnection();
         const [user] = await con.execute(SELECT_USER_BY_ID, [id]);
         delete user.password;
-        const payment = await paymentDAO.getById(user[0].id_payment);
-        const address = await addressDAO.getById(user[0].id_address);
+        const payment = await paymentDAO.getById(user[0]["id_payment"]);
+        const address = await addressDAO.getById(user[0]["id_address"]);
         return new User(user[0].id, user[0].firstname, user[0].lastname, user[0].password, user[0].email, user[0].phone, user[0].active, user[0].admin, user[0].profileImg, payment, address);
     }catch (error) {
         log.error("Error userDAO getById : " + error);
         throw errorMessage;
-    } finally {
+    }finally {
         if (con !== null) {
             con.end();
         }
@@ -103,7 +102,7 @@ async function getAllUser(){
     }catch (error) {
         log.error("Error userDAO getAllUser : " + error);
         throw errorMessage;
-    } finally {
+    }finally {
         if (con !== null) {
             con.end();
         }
@@ -119,7 +118,7 @@ async function getControlUser(email){
     }catch (error) {
         log.error("Error userDAO getControl : " + error);
         throw errorMessage;
-    } finally {
+    }finally {
         if (con !== null) {
             con.end();
         }
