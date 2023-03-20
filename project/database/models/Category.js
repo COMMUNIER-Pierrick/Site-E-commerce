@@ -3,4 +3,8 @@ module.exports = class Category{
         this.id = id;
         this.categoryName = categoryName;
     };
+
+    static CategoryUpdateProfile(categoryName){
+        return new Category(null, categoryName);
+    };
 }
