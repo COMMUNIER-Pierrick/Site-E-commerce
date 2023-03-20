@@ -27,7 +27,7 @@ const insert = async (req, res) => {
         const user = await userDAO.insert(newUser);
         delete user.password;
 
-        return res.status(201).send({"Message": "Votre compte a bien été créé", "User": user})
+        return res.status(201).send({"Message": "Votre compte a bien été créé", "User": user});
 
     }catch (error) {
         log.error("Error userDAO.js Register");
@@ -43,22 +43,27 @@ const remove = async (req, res) => {
     await paymentDAO.remove(user.payment[0].id);
     await addressDAO.remove(user.address[0].id);
     const message = "L'utilisateur à bien été supprimer.";
-    res.status(200).send( {"Message": message});
+    res.status(200).send({"Message": message});
 };
 
 const updateProfile = async (req, res) => {
 
     const {id} = req.params;
     let userData = req.body.User;
-    const user = User.UserUpdateProfile(userData[0].firstname, userData[0].lastname, userData[0].email, userData[0].phone);
+    const user = User.UserUpdateProfile(userData.firstname, userData.lastname, userData.email, userData.phone);
 
     const {error} = updateValidation(user);
     if(error){
         log.error("Error update : " + error.details[0].message);
-        return res.status(400).send({ error: error.details[0].message });
+        return res.status(400).send({ error: error.details[0].message});
     }
 
     try{
+        const userControl = await userDAO.getControlUser(user.email);
+        if (userControl.length) {
+            return res.status(409).send({error: "Il y a un compte qui utilise déjà cet email"});
+        }
+
         const newUser = await userDAO.updateProfile(user, id);
         delete newUser.password;
         const message = "mise à jour réussi.";
