@@ -1,6 +1,6 @@
-CREATE DATABASE `site_e_commerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE `site_e-commerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE `site_e_commerce`;
+USE `site_e-commerce`;
 
 CREATE TABLE `user` (
                          `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -18,9 +18,9 @@ CREATE TABLE `user` (
 
 CREATE TABLE `product`(
                            `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                           `product_name` INT NOT NULL,
+                           `product_name` VARCHAR(250) NOT NULL,
                            `id_category` INT NOT NULL,
-                           `id_sub_category` INT NOT NULL,
+                           `id_subcategory` INT NOT NULL,
                            `price` DOUBLE NULL,
                            `product_img` VARCHAR(255) NOT NULL DEFAULT 'no_picture.png',
                            `description_product` TEXT NULL,
@@ -30,12 +30,12 @@ CREATE TABLE `product`(
 
 CREATE TABLE `category`(
                         `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        `category_name` VARCHAR(50) NOT NULL
+                        `category_name` VARCHAR(250) NOT NULL
 )Engine = InnoDB;
 
-CREATE TABLE `sub_category`(
+CREATE TABLE `subcategory`(
                         `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                        `sub_category_name` VARCHAR(50) NOT NULL
+                        `subcategory_name` VARCHAR(250) NOT NULL
 )Engine = InnoDB;
 
 CREATE TABLE `address`(
@@ -78,7 +78,7 @@ ALTER TABLE `user`  ADD CONSTRAINT `fk_user_payment` FOREIGN KEY (`id_payment`) 
 ALTER TABLE `user` ADD CONSTRAINT `fk_user_address` FOREIGN KEY (`id_address`) REFERENCES `address`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `product` ADD CONSTRAINT `fk_product_category` FOREIGN KEY (`id_category`) REFERENCES `category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `product` ADD CONSTRAINT `fk_product_sub-category` FOREIGN KEY (`id_sub_category`) REFERENCES `sub_category`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `product` ADD CONSTRAINT `fk_product_subcategory` FOREIGN KEY (`id_subcategory`) REFERENCES `subcategory`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_status` FOREIGN KEY (`id_status`)  REFERENCES `status`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `order` ADD CONSTRAINT `fk_orders_id_basket` FOREIGN KEY (`id_basket`) REFERENCES `basket`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
