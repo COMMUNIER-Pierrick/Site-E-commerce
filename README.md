@@ -1,4 +1,4 @@
-# Site-E-commerce (back-end)
+# Site E-commerce (back-end)
 
 ## Description
 
